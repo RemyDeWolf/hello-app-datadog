@@ -2,7 +2,7 @@ This simple example shows how to test Datadog Application Performance Monitoring
 
 ## Build and run locally
 
-If you don't want to change the application but just test that Datadog works, skip this page.
+If you don't want to change the application but just test that Datadog works, skip this section.
 
 1. Build the image
     ```bash
