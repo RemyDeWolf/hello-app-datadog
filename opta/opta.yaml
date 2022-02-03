@@ -1,0 +1,13 @@
+# opta.yaml
+name: staging # name of the environment
+org_name: my-org # your organization name
+providers:
+  # for other providers check https://docs.opta.dev/getting-started/
+  aws:
+    region: <AWS REGION>
+    account_id: <AWS ACOUNT ID>
+modules:
+  - type: base
+  - type: k8s-cluster
+  - type: k8s-base
+  - type: datadog

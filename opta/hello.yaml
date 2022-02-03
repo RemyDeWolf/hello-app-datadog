@@ -1,0 +1,15 @@
+# hello.yaml
+name: hello
+environments:
+  - name: staging
+    path: "opta.yaml" # the file we created in previous step
+modules:
+  - type: k8s-service
+    name: hello
+    port:
+      http: 80
+    image: ghcr.io/remydewolf/hello-app-datadog/hello-app-datadog:main
+    healthcheck_path: "/"
+    # path on the load balancer to access this service
+    public_uri: "/hello"
+
