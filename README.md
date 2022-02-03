@@ -24,7 +24,8 @@ helm repo add datadog https://helm.datadoghq.com
 helm repo update
 
 # deploy using default values
-helm install datadog -f dd-opta-trimmed.yaml  --set datadog.apiKey=$DD_API_KEY --set datadog.appKey=$DD_APP_KEY --create-namespace -n datadog datadog/datadog
+helm install datadog -f dd-opta-trimmed.yaml  --set datadog.apiKey=$DD_API_KEY --set datadog.appKey=$DD_APP_KEY \
+   --create-namespace -n datadog datadog/datadog
 ```
 
 If you want to enable the admissionController, set a custom values file such as:
