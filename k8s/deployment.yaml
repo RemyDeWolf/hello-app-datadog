@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: hello-app-datadog
+  name: hello-app-datadog
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-app-datadog
+  template:
+    metadata:
+      labels:
+        app: hello-app-datadog
+        admission.datadoghq.com/enabled: "true"
+        # uncomment if not using the Datadog Admission Controller
+        # tags.datadoghq.com/env: "staging"
+        # tags.datadoghq.com/version: "0.0.1"
+    spec:
+      containers:
+      - image: ghcr.io/remydewolf/hello-app-datadog/hello-app-datadog:main
+        env:
+          - name: DD_SERVICE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.labels['app']
+          # uncomment if not using the Datadog Admission Controller
+          # - name: DD_AGENT_HOST
+          #   valueFrom:
+          #     fieldRef:
+          #       fieldPath: status.hostIP
+          # - name: DD_ENV
+          #   valueFrom:
+          #     fieldRef:
+          #       fieldPath: metadata.labels['tags.datadoghq.com/env']
+          # - name: DD_VERSION
+          #   valueFrom:
+          #     fieldRef:
+          #       fieldPath: metadata.labels['tags.datadoghq.com/version']
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: main
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: k8s-service
+        ports:
+        - containerPort: 80
+          name: main
+          protocol: TCP
