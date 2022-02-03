@@ -1,4 +1,4 @@
-This simple example shows how to test Application Performance Monitoring (APM) for a simple docker container deployed to Kubernetes.
+This simple example shows how to test Datadog Application Performance Monitoring (APM) for a simple docker container deployed to Kubernetes.
 
 ## Build and run locally
 
