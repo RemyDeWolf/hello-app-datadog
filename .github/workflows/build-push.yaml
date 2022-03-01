@@ -39,10 +39,10 @@ jobs:
         with:
           context: .
           load: true
-          tags: ${{ env.TEST_TAG }}
+          tags: ${{ env.IMAGE_NAME }}
       - name: Test flask
         run: |
-          docker run --rm ${{ env.TEST_TAG }} flask shell
+          docker run --rm ${{ env.IMAGE_NAME }} flask shell
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
